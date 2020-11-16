@@ -1,0 +1,31 @@
+<div class="login-wrap">
+  <div >
+<!--login form-->
+    <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+      <nz-form-item>
+<!--        input user email-->
+        <nz-form-control nzErrorTip="Please input your Email!">
+          <nz-input-group nzPrefixIcon="folder">
+            <input type="text" nz-input formControlName="email" placeholder="Email" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+<!--      input user password-->
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your Password!">
+          <nz-input-group nzPrefixIcon="lock">
+            <input type="password" nz-input formControlName="password" placeholder="Password" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+<!--login button-->
+          <button nz-button class="login-form-button" [nzType]="'primary'">Log in</button>
+          <a routerLink="/reg" routerLinkActive="active">Register Here!</a>
+
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </div>
+</div>

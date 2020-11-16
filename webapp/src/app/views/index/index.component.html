@@ -1,0 +1,435 @@
+<nz-layout class="backtree">
+  <nz-header>
+<!--     search component-->
+    <nz-input-group [nzSuffix]="suffixIconSearch" style="width: 20%;">
+      <input type="text" nz-input [(ngModel)]="keyword" (keyup.enter)="keySearch()" nz-input
+        placeholder="input search text" />
+    </nz-input-group>
+    <ng-template #suffixIconSearch>
+    </ng-template>
+    &nbsp;
+    <button nz-button nzType="primary" (click)="keySearch()">
+      <i nz-icon nzType="search"></i>Search
+    </button>
+    <span class="wheat">  hello, {{userData.username}},</span>
+<!-- log out-->
+    <a (click)="logout()"><span>Logout </span><i nz-icon nzType="logout" nzTheme="outline"></i></a>
+
+  </nz-header>
+<!--  button list -->
+  <nz-content class="backtree">
+    <br>
+    <p>
+<!--      create event button -->
+      <button *ngIf="!showlist" nz-button nzType="primary" nzSize="large" nzShape="round" (click)="showadd()">
+        <i nz-icon nzType="plus" nzTheme="outline"></i>
+        Create
+      </button>
+<!--   come back button   &nbsp;-->
+      <button *ngIf="showlist" nz-button nzType="primary" nzSize="large" nzShape="round" (click)="returnIndex()">
+        <i nz-icon nzType="left" nzTheme="outline"></i>
+        Return
+      </button>
+<!--   edit event button   &nbsp;-->
+      <button *ngIf="isedit" nz-button nzType="default" nzSize="large" nzShape="round" (click)="showedit()">
+        <i nz-icon nzType="edit" nzTheme="outline"></i>
+        Edit
+      </button>
+<!--    delete event button  &nbsp;-->
+      <button *ngIf="isedit" nz-button nzType="default" nzSize="large" nzShape="round" (click)="delevent()">
+        <i nz-icon nzType="delete" nzTheme="outline"></i>
+        Delete
+      </button>
+      &nbsp;
+
+    </p>
+
+<!-- show spinning-->
+    <nz-spin style="text-align: center;" [nzSpinning]="!isSpinning" nzSimple [nzSize]="'large'"></nz-spin>
+
+    <div [hidden]="isSpinning == false || showlist == true" class="ca-wrap">
+
+      <nz-alert
+        nzMessage="Your selected date: {{ selectedValue | date: 'yyyy-MM-dd' }}, Your selected event: {{ currselectedObj.title || '' }}">
+      </nz-alert>
+<!--      calendar-->
+      <nz-calendar [(ngModel)]="selectedValue" (nzSelectChange)="selectChange($event)">
+
+        <ul *nzDateCell="let date" class="events">
+          <ng-container *ngIf="date.getMonth()+1 == timeMonth" [ngSwitch]="date.getDate()">
+            <ng-container *ngSwitchCase="1" >
+              <li *ngFor="let item of listDataMap.one">
+                <nz-badge nzStatus="success" [nzTooltipTitle]="showText(item)" nz-tooltip [nzText]="item.title"
+                  (click)="tableshoweditbtn(listDataMap.one)">
+                </nz-badge>
+              </li>
+            </ng-container>
+            <ng-container *ngSwitchCase="2" >
+              <li *ngFor="let item of listDataMap.two">
+                <nz-badge nzStatus="success" [nzTooltipTitle]="showText(item)" nz-tooltip [nzText]="item.title"
+                  (click)="tableshoweditbtn(listDataMap.two)">
+                </nz-badge>
+              </li>
+            </ng-container>
+            <ng-container *ngSwitchCase="3" >
+              <li *ngFor="let item of listDataMap.three">
+                <nz-badge nzStatus="success" [nzTooltipTitle]="showText(item)" nz-tooltip [nzText]="item.title"
+                  (click)="tableshoweditbtn(listDataMap.three)">
+                </nz-badge>
+              </li>
+            </ng-container>
+            <ng-container *ngSwitchCase="4" >
+              <li *ngFor="let item of listDataMap.four">
+                <nz-badge nzStatus="success" [nzTooltipTitle]="showText(item)" nz-tooltip [nzText]="item.title"
+                  (click)="tableshoweditbtn(listDataMap.four)">
+                </nz-badge>
+              </li>
+            </ng-container>
+            <ng-container *ngSwitchCase="5" >
+
+              <li *ngFor="let item of listDataMap.five">
+                <nz-badge nzStatus="success" [nzTooltipTitle]="showText(item)" nz-tooltip [nzText]="item.title"
+                  (click)="tableshoweditbtn(listDataMap.five)">
+                </nz-badge>
+              </li>
+            </ng-container>
+            <ng-container *ngSwitchCase="6" >
+              <li *ngFor="let item of listDataMap.six" >
+                <nz-badge nzStatus="success" [nzTooltipTitle]="showText(item)" nz-tooltip [nzText]="item.title"
+                  (click)="tableshoweditbtn(listDataMap.six)">
+                </nz-badge>
+              </li>
+            </ng-container>
+            <ng-container *ngSwitchCase="7">
+              <li *ngFor="let item of listDataMap.seven">
+                <nz-badge nzStatus="success" [nzTooltipTitle]="showText(item)" nz-tooltip [nzText]="item.title"
+                  (click)="tableshoweditbtn(listDataMap.seven)">
+                </nz-badge>
+              </li>
+            </ng-container>
+            <ng-container *ngSwitchCase="8">
+              <li *ngFor="let item of listDataMap.eight">
+                <nz-badge nzStatus="success" [nzTooltipTitle]="showText(item)" nz-tooltip [nzText]="item.title"
+                  (click)="tableshoweditbtn(listDataMap.eight)">
+                </nz-badge>
+              </li>
+            </ng-container>
+            <ng-container *ngSwitchCase="9">
+              <li *ngFor="let item of listDataMap.nine">
+                <nz-badge nzStatus="success" [nzTooltipTitle]="showText(item)" nz-tooltip [nzText]="item.title"
+                  (click)="tableshoweditbtn(listDataMap.nine)">
+                </nz-badge>
+              </li>
+            </ng-container>
+            <ng-container *ngSwitchCase="10">
+              <li *ngFor="let item of listDataMap.ten">
+                <nz-badge nzStatus="success" [nzTooltipTitle]="showText(item)" nz-tooltip [nzText]="item.title"
+                  (click)="tableshoweditbtn(listDataMap.ten)">
+                </nz-badge>
+              </li>
+            </ng-container>
+            <ng-container *ngSwitchCase="11">
+              <li *ngFor="let item of listDataMap.eleven">
+                <nz-badge nzStatus="success" [nzTooltipTitle]="showText(item)" nz-tooltip [nzText]="item.title"
+                  (click)="tableshoweditbtn(listDataMap.eleven)">
+                </nz-badge>
+              </li>
+            </ng-container>
+            <ng-container *ngSwitchCase="12">
+              <li *ngFor="let item of listDataMap.twelve">
+                <nz-badge nzStatus="success" [nzTooltipTitle]="showText(item)" nz-tooltip [nzText]="item.title"
+                  (click)="tableshoweditbtn(listDataMap.twelve)">
+                </nz-badge>
+              </li>
+            </ng-container>
+            <ng-container *ngSwitchCase="13">
+              <li *ngFor="let item of listDataMap.thirteen">
+                <nz-badge nzStatus="success" [nzTooltipTitle]="showText(item)" nz-tooltip [nzText]="item.title"
+                  (click)="tableshoweditbtn(listDataMap.thirteen)">
+                </nz-badge>
+              </li>
+            </ng-container>
+            <ng-container *ngSwitchCase="14">
+              <li *ngFor="let item of listDataMap.fourteen">
+                <nz-badge nzStatus="success" [nzTooltipTitle]="showText(item)" nz-tooltip [nzText]="item.title"
+                  (click)="tableshoweditbtn(listDataMap.fourteen)">
+                </nz-badge>
+              </li>
+            </ng-container>
+            <ng-container *ngSwitchCase="15">
+              <li *ngFor="let item of listDataMap.fifteen">
+                <nz-badge nzStatus="success" [nzTooltipTitle]="showText(item)" nz-tooltip [nzText]="item.title"
+                  (click)="tableshoweditbtn(listDataMap.fifteen)">
+                </nz-badge>
+              </li>
+            </ng-container>
+            <ng-container *ngSwitchCase="16">
+              <li *ngFor="let item of listDataMap.sixteen">
+                <nz-badge nzStatus="success" [nzTooltipTitle]="showText(item)" nz-tooltip [nzText]="item.title"
+                  (click)="tableshoweditbtn(listDataMap.sixteen)">
+                </nz-badge>
+              </li>
+            </ng-container>
+            <ng-container *ngSwitchCase="17">
+              <li *ngFor="let item of listDataMap.seventeen">
+                <nz-badge nzStatus="success" [nzTooltipTitle]="showText(item)" nz-tooltip [nzText]="item.title"
+                  (click)="tableshoweditbtn(listDataMap.seventeen)">
+                </nz-badge>
+              </li>
+            </ng-container>
+            <ng-container *ngSwitchCase="18">
+              <li *ngFor="let item of listDataMap.eighteen">
+                <nz-badge nzStatus="success" [nzTooltipTitle]="showText(item)" nz-tooltip [nzText]="item.title"
+                  (click)="tableshoweditbtn(listDataMap.eighteen)">
+                </nz-badge>
+              </li>
+            </ng-container>
+            <ng-container *ngSwitchCase="19">
+              <li *ngFor="let item of listDataMap.nineteen">
+                <nz-badge nzStatus="success" [nzTooltipTitle]="showText(item)" nz-tooltip [nzText]="item.title"
+                  (click)="tableshoweditbtn(listDataMap.nineteen)">
+                </nz-badge>
+              </li>
+            </ng-container>
+            <ng-container *ngSwitchCase="20">
+              <li *ngFor="let item of listDataMap.twenty">
+                <nz-badge nzStatus="success" [nzTooltipTitle]="showText(item)" nz-tooltip [nzText]="item.title"
+                  (click)="tableshoweditbtn(listDataMap.twenty)">
+                </nz-badge>
+              </li>
+            </ng-container>
+            <ng-container *ngSwitchCase="21">
+              <li *ngFor="let item of listDataMap.twentyone">
+                <nz-badge nzStatus="success" [nzTooltipTitle]="showText(item)" nz-tooltip [nzText]="item.title"
+                  (click)="tableshoweditbtn(listDataMap.twentyone)">
+                </nz-badge>
+              </li>
+            </ng-container>
+            <ng-container *ngSwitchCase="22">
+              <li *ngFor="let item of listDataMap.twentytwo">
+                <nz-badge nzStatus="success" [nzTooltipTitle]="showText(item)" nz-tooltip [nzText]="item.title"
+                  (click)="tableshoweditbtn(listDataMap.twentytwo)">
+                </nz-badge>
+              </li>
+            </ng-container>
+            <ng-container *ngSwitchCase="23">
+              <li *ngFor="let item of listDataMap.twentythree">
+                <nz-badge nzStatus="success" [nzTooltipTitle]="showText(item)" nz-tooltip [nzText]="item.title"
+                  (click)="tableshoweditbtn(listDataMap.twentythree)">
+                </nz-badge>
+              </li>
+            </ng-container>
+            <ng-container *ngSwitchCase="24">
+              <li *ngFor="let item of listDataMap.twentyfour">
+                <nz-badge nzStatus="success" [nzTooltipTitle]="showText(item)" nz-tooltip [nzText]="item.title"
+                  (click)="tableshoweditbtn(listDataMap.twentyfour)">
+                </nz-badge>
+              </li>
+            </ng-container>
+            <ng-container *ngSwitchCase="25">
+              <li *ngFor="let item of listDataMap.twentyfive">
+                <nz-badge nzStatus="success" [nzTooltipTitle]="showText(item)" nz-tooltip [nzText]="item.title"
+                  (click)="tableshoweditbtn(listDataMap.twentyfive)">
+                </nz-badge>
+              </li>
+            </ng-container>
+            <ng-container *ngSwitchCase="26">
+              <li *ngFor="let item of listDataMap.twentysix">
+                <nz-badge nzStatus="success" [nzTooltipTitle]="showText(item)" nz-tooltip [nzText]="item.title"
+                  (click)="tableshoweditbtn(listDataMap.twentysix)">
+                </nz-badge>
+              </li>
+            </ng-container>
+            <ng-container *ngSwitchCase="27">
+              <li *ngFor="let item of listDataMap.twentyseven">
+                <nz-badge nzStatus="success" [nzTooltipTitle]="showText(item)" nz-tooltip [nzText]="item.title"
+                  (click)="tableshoweditbtn(listDataMap.twentyseven)">
+                </nz-badge>
+              </li>
+            </ng-container>
+            <ng-container *ngSwitchCase="28">
+              <li *ngFor="let item of listDataMap.twentyeight">
+                <nz-badge nzStatus="success" [nzTooltipTitle]="showText(item)" nz-tooltip [nzText]="item.title"
+                  (click)="tableshoweditbtn(listDataMap.twentyeight)">
+                </nz-badge>
+              </li>
+            </ng-container>
+            <ng-container *ngSwitchCase="29">
+              <li *ngFor="let item of listDataMap.twentynine">
+                <nz-badge nzStatus="success" [nzTooltipTitle]="showText(item)" nz-tooltip [nzText]="item.title"
+                  (click)="tableshoweditbtn(listDataMap.twentynine)">
+                </nz-badge>
+              </li>
+            </ng-container>
+            <ng-container *ngSwitchCase="30">
+              <li *ngFor="let item of listDataMap.thirty">
+                <nz-badge nzStatus="success" [nzTooltipTitle]="showText(item)" nz-tooltip [nzText]="item.title"
+                  (click)="tableshoweditbtn(listDataMap.thirty)">
+                </nz-badge>
+              </li>
+            </ng-container>
+            <ng-container *ngSwitchCase="31">
+              <li *ngFor="let item of listDataMap.thirtyone">
+                <nz-badge nzStatus="success" [nzTooltipTitle]="showText(item)" nz-tooltip [nzText]="item.title"
+                  (click)="tableshoweditbtn(listDataMap.thirtyone)">
+                </nz-badge>
+              </li>
+            </ng-container>
+          </ng-container>
+        </ul>
+
+      </nz-calendar>
+    </div>
+
+<!--show event list-->
+    <div [hidden]="!showlist" class="ca-wrap">
+      <nz-alert nzMessage="Your selected event: {{ currselectedObj.title || '' }}">
+      </nz-alert>
+      <br>
+
+
+      <nz-list style="border: none;" [nzDataSource]="listdata" nzBordered  [nzRenderItem]="defaultItem">
+
+
+        <ng-template #defaultItem let-item >
+
+          <nz-layout (click)="showeditbtn(item)" width="100%" class="layouttop">
+            <nz-row >
+                <nz-col nzSpan="8">
+                  <nz-row>
+                    <nz-col nzSpan="12"><i nz-icon nzType="credit-card" nzTheme="outline"></i><span> {{item.title}}</span></nz-col>
+                    <nz-col nzSpan="12"><i nz-icon nzType="field-time" nzTheme="outline"></i><span> {{item.startTime | date:'MM-dd HH:mm'}}</span></nz-col>
+                  </nz-row>
+                  <nz-row>
+                    <nz-col nzSpan="12"><i nz-icon nzType="environment" nzTheme="outline"></i><span> {{item.place}}</span></nz-col>
+                    <nz-col nzSpan="12"><i nz-icon nzType="field-time" nzTheme="outline"></i><span> {{item.endTime| date:'MM-dd HH:mm'}}</span></nz-col>
+                  </nz-row>
+                </nz-col>
+              <nz-col nzSpan="6"><p>{{item.description}}</p></nz-col>
+                <nz-col nzSpan="4">
+                  <nz-row>
+                    <nz-col><i nz-icon nzType="idcard" nzTheme="outline"></i><span> {{item.creator}}</span>
+                    </nz-col>
+                  </nz-row>
+                  <nz-row>
+                    <nz-col>
+                      <i nz-icon nzType="mail" nzTheme="outline"></i><span> {{item.creatorEmail}}</span>
+                    </nz-col>
+                  </nz-row>
+                </nz-col>
+              <nz-col  nzSpan="6">
+                <nz-list-item  [nzActions]="[starAction]">
+                  <ng-template #starAction>
+                    <button nz-button nzType="dashed" (click)="showCommentModal(item)">
+                      <i nz-icon nzType="comment" nzTheme="outline"></i>
+                      <span>comment</span>
+                    </button>
+                  </ng-template>
+                </nz-list-item>
+              </nz-col>
+
+            </nz-row>
+
+<!--            comment-->
+            <nz-row *ngIf="item.comments.length>0" class="commtents">
+              <nz-list [nzDataSource]="item.comments" [nzRenderItem]="items"  [nzItemLayout]="'horizontal'">
+                <ng-template #items let-it>
+
+                  <nz-comment [nzAuthor]="it.commentBy"  [nzDatetime]="it.commentDate| date:'yyyy-MM-dd HH:mm:ss'">
+
+                    <nz-avatar nz-comment-avatar nzIcon="user" nz-icon nzType="message" nzSrc="assets/img/forest_avator.png"></nz-avatar>
+                    <nz-comment-content>
+                      <p>{{ it.content }}</p>
+                    </nz-comment-content>
+                  </nz-comment>
+                </ng-template>
+
+              </nz-list>
+            </nz-row>
+
+
+          </nz-layout>
+
+        </ng-template>
+
+      </nz-list>
+
+
+
+    </div>
+
+
+  </nz-content>
+</nz-layout>
+
+
+<!--form edit event form-->
+<nz-modal [(nzVisible)]="isVisible" nzMaskClosable="false" nzTitle="Edit Event" (nzOnCancel)="handleCancel()"
+  (nzOnOk)="submitForm()" [nzOkLoading]="isOkLoading">
+
+  <form nz-form [formGroup]="validateForm" class="">
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5" nzRequired nzFor="title">title</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzErrorTip="Please input  title!">
+        <nz-input-group>
+          <input type="text" nz-input id="title" formControlName="title" placeholder="title" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5" nzRequired>startTime</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzErrorTip="Please input  startTime!">
+        <nz-date-picker nzShowTime nzFormat="yyyy-MM-dd HH:mm:ss" formControlName="startTime"></nz-date-picker>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5" nzRequired>endTime</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzErrorTip="Please input  endTime!">
+        <nz-date-picker nzShowTime nzFormat="yyyy-MM-dd HH:mm:ss" formControlName="endTime"></nz-date-picker>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5" nzRequired nzFor="place">place</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzErrorTip="Please input  place!">
+        <nz-input-group>
+          <input type="text" nz-input id="place" formControlName="place" placeholder="place" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5" nzRequired nzFor="description">description</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzErrorTip="Please input  description!">
+        <nz-input-group>
+          <input type="text" nz-input id="description" formControlName="description" placeholder="description" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+
+
+    <nz-form-item>
+<!--      the event is publiv or private -->
+      <nz-form-label [nzSpan]="5" nzRequired nzFor="public">public</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzErrorTip="public">
+
+        <nz-radio-group  nzName="public">
+          <label nz-radio nzValue="0">Private</label>
+          <label nz-radio  nzValue="1">Open</label>
+        </nz-radio-group>
+      </nz-form-control>
+    </nz-form-item>
+
+  </form>
+
+</nz-modal>
+
+<!-- edit comments-->
+<nz-modal [(nzVisible)]="isCommentVisible" nzMaskClosable="false" nzTitle="Edit Comment"
+  (nzOnCancel)="commenthandleCancel()" (nzOnOk)="submitFormComment()" [nzOkLoading]="isCommentOkLoading">
+
+  <input nz-input placeholder="Comment" [(ngModel)]="comments" />
+
+</nz-modal>

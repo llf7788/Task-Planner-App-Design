@@ -1,0 +1,62 @@
+nz-header {
+  background: #fff;
+  color: #000;
+  text-align: right;
+  border-bottom: 1px solid #dadce0;
+}
+
+.ca-wrap {
+  width: 80%;
+  margin: 0 auto;
+}
+nz-date-picker ::ng-deep .ant-calendar-picker {
+  width: 100%;
+}
+
+nz-date-picker,
+nz-time-picker {
+  width: 100%;
+}
+nz-sider{
+  background: whitesmoke;
+}
+
+
+.events {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.events .ant-badge-status {
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+  text-overflow: ellipsis;
+  font-size: 12px;
+}
+
+.notes-month {
+  text-align: center;
+  font-size: 28px;
+}
+
+.notes-month section {
+  font-size: 28px;
+}
+
+.backtree {
+  background-image:url('/../../assets/img/tree.svg') no-repeat center center / cover !important;
+}
+
+.layouttop{
+
+  margin-top: 10px;
+}
+
+.wheat{
+  color: wheat;
+}
+
+
+

@@ -1,0 +1,74 @@
+/* You can add global styles to this file, and also import other style files */
+.ca-wrap {
+
+    .ant-radio-group {
+      display: none !important;
+    }
+
+    .ant-fullcalendar-date.ng-star-inserted {
+      height: 240px !important;
+    }
+    .ant-fullcalendar-content.ng-star-inserted {
+      height: 200px !important;
+    }
+  }
+
+$--primary-color :#5bb12f;
+$primary-color :#5bb12f;
+$--link-color:#eb65a0;
+$--primary-background-color:#5bb12f;
+nz-header{
+  background: #3c3c3c !important;
+}
+body,h1,nz-layout,{
+  //background: #3c3c3c ;
+  background-image: url("/../../assets/img/tree.svg");
+  background-repeat:repeat-x;
+  background-size:cover;
+}
+nz-row{
+  background: #bccf02 !important;
+}
+.commtents{
+  background: #73c5e1 !important;
+  margin-bottom: 3px;
+}
+
+
+.ant-btn-primary{
+  background: #eb65a0 !important;
+  border-color: #eb65a0 !important;
+}
+button{
+  background: #eb65a0 !important;
+  color: white !important;
+}
+.ant-btn-link,button{
+  color: #9b539c !important;
+}
+
+a{
+  color:#9b539c !important;
+}
+.ant-picker-panel{
+  background: #bccf02 !important;
+
+}
+.ant-picker-calendar-full .ant-picker-panel .ant-picker-calendar-date{
+  border-top:2px solid #eb65a0 !important;
+}
+nz-col,nz-comment{
+  padding: 2px;
+}
+.ant-comment-content-author-time{
+  color:white;
+}
+button  span,button i{
+  color: white !important;
+}
+
+nz-content{
+  background-image: url("/../../assets/img/tree.svg");
+  background-repeat:repeat-x;
+  background-size:cover;
+}

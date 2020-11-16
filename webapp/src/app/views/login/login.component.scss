@@ -1,0 +1,35 @@
+.login-form {
+  max-width: 300px;
+}
+
+.login-form-forgot {
+  float: right;
+}
+
+.login-form-button {
+  width: 100%;
+}
+// login page
+.login-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url("/../../assets/img/tree.svg");
+  background-repeat:repeat-x;
+  background-size:cover;
+  //background: #eee;
+  > div {
+    // login form
+    background: #bccf02;
+    padding: 2%;
+    border-radius: 4px;
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    .login-form {
+      max-width: 100%;
+      width: 100%;
+    }
+  }
+}

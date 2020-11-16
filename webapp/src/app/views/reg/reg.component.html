@@ -1,0 +1,48 @@
+<div class="login-wrap">
+  <div>
+<!--    username -->
+    <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your Username!">
+          <nz-input-group nzPrefixIcon="user">
+            <input type="text" nz-input formControlName="username" placeholder="Username" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+<!--password-->
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your Password!">
+          <nz-input-group nzPrefixIcon="lock">
+            <input type="password" nz-input formControlName="password" placeholder="Password" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+<!--email-->
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your Email!">
+          <nz-input-group nzPrefixIcon="folder">
+            <input type="email" nz-input formControlName="email" placeholder="Email" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+<!--telephone-->
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your Phone!">
+          <nz-input-group nzPrefixIcon="phone">
+            <input type="number" nz-input formControlName="phone" placeholder="Phone" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+<!--     confirm register   -->
+          <button nz-button class="login-form-button" [nzType]="'primary'">Register</button>
+<!--        link to login page-->
+          <a routerLink="/login" routerLinkActive="active">Log In Here!</a>
+
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </div>
+</div>
