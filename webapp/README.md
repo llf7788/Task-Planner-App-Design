@@ -1,5 +1,5 @@
 # introduction
-this application is name Forest Calendar. It Can be used to share arrangements with others. Let life live under control.
+this application‘s name is Forest Calendar. It Can be used to share arrangements with others. Let life live under control.
 
 
 # feature
